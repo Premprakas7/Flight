@@ -47,22 +47,6 @@ router.delete("/:id", async(req,res)=>{
     }
 })
 
-router.get("/:key", async(req,res)=>{
-    try {
-        console.log(req.params.key)
-        const searches=await Search.find(
-            {
-                "$or":[
-                    {"from":{$regex:req.params.key}},
-                    {"to":{$regex:req.params.key}}
-                ]
 
-            }
-        ).lean().exec();
-        return res.status(200).send(searches)
-    } catch (err) {
-        return res.status(500).send(err)
-    }
-})
 
 module.exports=router;
